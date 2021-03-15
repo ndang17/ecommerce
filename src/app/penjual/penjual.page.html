@@ -1,0 +1,48 @@
+<ion-header mode="ios">
+  <ion-toolbar style="height: 57px;padding-top: 5px;">
+    <ion-buttons slot="start">
+      <ion-button color="light" (click)="goBack()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Penjual</ion-title>
+  </ion-toolbar>
+   <ion-toolbar style="--background: #eaeaea;color: #333333;">
+    <ion-title size="small" style="padding-bottom: 7px;">
+
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-button expand="block" [routerLink]="['/penjual/mutasi']" color="medium" fill="solid">Lihat Mutasi</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" [routerLink]="['/penjual/tambahbarang']" color="warning" fill="solid">Tambah Barang</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content mode="ios">
+
+  <ion-list *ngIf="listProduct.length>0">
+
+    <ion-item *ngFor="let item of listProduct">
+      <ion-avatar slot="start">
+        <img *ngIf="item.photo==''" src="./assets/miranda.jpg">
+        <img *ngIf="item.photo!=''" src="{{item.photo}}">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ item.product_name }}</h2>
+        <h3>{{ formatRupiah(item.price,"Rp. ") }}</h3>
+        <p>Kode : {{ item.pcode }} | Stok : {{ item.jumlah }}</p>
+        
+      </ion-label>
+    </ion-item>
+
+  </ion-list>
+
+</ion-content>

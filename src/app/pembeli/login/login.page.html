@@ -1,0 +1,39 @@
+<ion-header mode="ios">
+  <ion-toolbar style="height: 57px;padding-top: 5px;">
+    <ion-buttons slot="start">
+      <ion-button color="light" (click)="goBack()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+  <ion-toolbar style="--background: #eaeaea;color: #333333;">
+    <ion-title size="small" style="padding-bottom: 7px;">
+      <ion-button expand="block" [routerLink]="['/pembeli/registrasi']" color="warning" fill="solid">Registrasi</ion-button>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content mode="ios">
+
+  <div style="margin-top: 20px;" *ngIf="listUser.length>0">
+
+    <ion-list>
+      <ion-list-header style="margin-bottom: 30px;">
+            Pilih contoh akun dibawah atau lakukan registrasi
+          </ion-list-header>
+
+          <ion-item *ngFor="let item of listUser" (click)="loginAs(item)">
+            <ion-icon color="medium" slot="start" name="person-circle"></ion-icon>
+            <ion-label>
+              <h2>{{ item.customer_name }}</h2>
+              <p>{{ item.address }}</p>
+            </ion-label>
+          </ion-item>
+    </ion-list>
+
+  </div>
+
+  
+
+</ion-content>

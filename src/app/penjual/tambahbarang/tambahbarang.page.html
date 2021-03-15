@@ -1,0 +1,49 @@
+<ion-header mode="ios">
+  <ion-toolbar style="height: 57px;padding-top: 5px;">
+    <ion-buttons slot="start">
+      <ion-button color="light" (click)="goBack()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Tambah Barang</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content mode="ios">
+
+  <ion-card>
+    <ion-card-content>
+      <ion-item lines="none">
+            <ion-input placeholder="Kode Produk" type="number" [(ngModel)]="pcode"></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+            <ion-input placeholder="Nama Produk" [(ngModel)]="product_name"></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+            <ion-input placeholder="Stok" type="number" [(ngModel)]="jumlah"></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+            <ion-input placeholder="Harga" type="number" [(ngModel)]="price"></ion-input>
+      </ion-item>
+
+      <ion-label>Pilih Foto Produk</ion-label>
+      <div>
+        <ion-button color="medium" (click)="gettingFromCamera()" size="small">
+        <ion-icon slot="start" name="camera"></ion-icon> Buka Kamera</ion-button>
+
+        <ion-button color="medium" (click)="gettingFromGalery()" size="small">
+        <ion-icon slot="start" name="image"></ion-icon> Buka Galeri</ion-button>
+      </div>
+
+      <div *ngIf="photo!=''">
+        <img src="{{photo}}"/>
+      </div>
+    
+      <br/>
+      <br/>
+      <ion-button expand="block" (click)="simpanBarang()" color="warning">Simpan</ion-button>
+    </ion-card-content>
+
+  </ion-card>
+
+</ion-content>

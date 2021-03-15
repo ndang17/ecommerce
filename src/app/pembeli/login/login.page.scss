@@ -1,0 +1,37 @@
+ion-header {
+  ion-toolbar {
+
+    --background: #e91e63;
+    color: #ffffff;
+
+  }
+}
+
+
+
+ion-content {
+
+  ion-card {
+
+    ion-item {
+      border: 1px solid #eaeaea !important;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
+
+  }
+
+
+}
+
+
+.label-title {
+  white-space: break-spaces !important;
+}
+
+ion-footer {
+  ion-toolbar {
+    --background: #2f9495 !important;
+    min-height: 70px;
+  }
+}

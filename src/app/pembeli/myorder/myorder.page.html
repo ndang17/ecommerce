@@ -1,0 +1,97 @@
+<ion-header mode="ios">
+  <ion-toolbar style="height: 57px;padding-top: 5px;">
+    <ion-buttons slot="start">
+      <ion-button color="light" (click)="goBack()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Transaksi Saya</ion-title>
+  </ion-toolbar>
+  
+</ion-header>
+
+<ion-content mode="ios">
+
+  <div *ngIf="listOrder.length==0" style="text-align: center;margin-top: 30%;">
+    <img src="./assets/shopping.png" style="max-width: 77px;" />
+    <p style="color: #d88b8b;font-size: 21px;font-weight: 600;">-- Tidak ada orderan --</p>
+    <ion-button (click)="goBack()" color="warning" >Mulai berbelanja</ion-button>
+  </div>
+
+  <div *ngIf="listOrder.length>0">
+
+    <ion-card *ngFor="let item of listOrder">
+      <ion-item>
+        <ion-avatar slot="start">
+          <img *ngIf="item.photo==''" src="./assets/miranda.jpg">
+          <img *ngIf="item.photo!=''" src="{{item.photo}}">
+        </ion-avatar>
+        <ion-label class="label-title">{{ item.product_name }}</ion-label>
+
+      </ion-item>
+
+      <ion-card-content>
+        <ion-grid style="text-align: right;">
+          <ion-row>
+            <ion-col size="12" style="color: #e91e63;">
+              {{ item.order_id }}
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col size="5">
+              Order : 
+            </ion-col>
+            <ion-col size="7">
+              {{ item.qty }} x {{ formatRupiah(item.price,"Rp. ") }}
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col size="5">
+              Total : 
+            </ion-col>
+            <ion-col size="7">
+              {{ formatRupiah( item.subtotal ,"Rp. ") }}
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col size="5">
+              Potongan : 
+            </ion-col>
+            <ion-col size="7">
+              ( - ) {{ formatRupiah( item.amount_discount ,"Rp. ") }}
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col size="5">
+              PPn : 
+            </ion-col>
+            <ion-col size="7">
+              {{ formatRupiah( ((item.subtotal - item.amount_discount) * 0.1) ,"Rp. ") }}
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col size="5">
+              Total Bayar : 
+            </ion-col>
+            <ion-col size="7">
+              <strong>
+                {{ formatRupiah( (((item.subtotal - item.amount_discount) * 0.1) + (item.subtotal - item.amount_discount))  ,"Rp. ") }}
+              </strong>
+            </ion-col>
+          </ion-row>
+
+        </ion-grid>
+        
+      </ion-card-content>
+
+    </ion-card>
+
+  </div>
+
+
+</ion-content>

@@ -1,0 +1,50 @@
+<ion-header mode="ios">
+  <ion-toolbar style="height: 57px;padding-top: 5px;">
+    <ion-buttons slot="start">
+      <ion-button color="light" (click)="goBack()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Mutasi</ion-title>
+  </ion-toolbar>
+  
+</ion-header>
+
+<ion-content mode="ios">
+
+
+<ion-list>
+        <ion-list-header>
+          List Mutasi
+        </ion-list-header>
+
+        <ion-item *ngFor="let item of listMutasi">
+          <ion-avatar slot="start">
+            <img *ngIf="item.photo==''" src="./assets/miranda.jpg">
+            <img *ngIf="item.photo!=''" src="{{item.photo}}">
+          </ion-avatar>
+          <ion-label>
+            <h2>{{ item.product_name }}</h2>
+            <h3>{{ item.pcode }} - {{ confertDate(item.tgl_mutasi) }}</h3>
+            <p>
+              Qty : {{ item.jumlah }}
+              <br/>
+              {{ item.order_id }}
+            </p>
+          </ion-label>
+
+          <ion-badge *ngIf="item.type_mutasi=='I'" slot="end" color="success">
+            <ion-icon name="download-outline"></ion-icon>
+             in</ion-badge>
+          <ion-badge *ngIf="item.type_mutasi=='O'" slot="end" color="warning">
+            <ion-icon name="log-out-outline"></ion-icon>
+            out</ion-badge>
+
+        </ion-item>
+
+        
+
+        </ion-list>
+
+
+</ion-content>

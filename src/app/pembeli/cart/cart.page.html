@@ -1,0 +1,98 @@
+<ion-header mode="ios">
+  <ion-toolbar style="height: 57px;padding-top: 5px;">
+    <ion-buttons slot="start">
+      <ion-button color="light" (click)="goBack()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Cart</ion-title>
+  </ion-toolbar>
+  
+</ion-header>
+
+<ion-content mode="ios">
+
+  <div *ngIf="listCart.length==0" style="text-align: center;margin-top: 30%;">
+    <img src="./assets/shopping.png" style="max-width: 77px;" />
+    <p style="color: #d88b8b;font-size: 21px;font-weight: 600;">-- Tidak ada item di keranjang --</p>
+    <ion-button (click)="goBack()" color="warning" >Mulai berbelanja</ion-button>
+  </div>
+
+  <div *ngIf="listCart.length>0">
+
+    <ion-card *ngFor="let item of listCart">
+      <ion-item>
+        <ion-avatar slot="start">
+          <img *ngIf="item.photo==''" src="./assets/miranda.jpg">
+          <img *ngIf="item.photo!=''" src="{{item.photo}}">
+        </ion-avatar>
+        <ion-label class="label-title">{{ item.product_name }}</ion-label>
+
+        <ion-button fill="clear" (click)="removeFromCart(item)" color="danger" slot="end">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-button>
+      </ion-item>
+
+      <ion-card-content>
+        {{ formatRupiah(item.price,"Rp. ") }}
+        <br/>
+        Kode : {{ item.pcode }} | Stok : {{ item.jumlah }}
+      </ion-card-content>
+
+      <ion-item lines="none">
+        <ion-button color="medium" (click)="removeQty(item)" fill="clear">
+          <ion-icon slot="icon-only" name="remove-circle"></ion-icon>
+        </ion-button>
+        <p style="width: 40px;text-align: center;">{{ item.qty }}</p>      
+        <ion-button color="success" (click)="addQty(item)" fill="clear">
+          <ion-icon slot="icon-only" name="add-circle"></ion-icon>
+        </ion-button>
+        
+        <ion-badge slot="end" color="warning">{{ formatRupiah(item.subtotal,"Rp. ") }}</ion-badge>
+      </ion-item>
+
+      <ion-item *ngIf="item.pcode=='010001'"  style="--background:#ffe1e1;font-size: 13px;">
+
+        <ion-label class="label-title">Setiap pembelian MIRANDA H.C N.BLACK 30.MC1, mendapat potongan Rp. 1.000</ion-label>
+        <ion-button fill="solid" *ngIf="useVoucher==0" slot="end" (click)="actionButtonVoucer()">Gunakan Voucher</ion-button>
+        <ion-button fill="solid" *ngIf="useVoucher==1" slot="end" color="danger" (click)="actionButtonVoucer()">Hapus Voucher</ion-button>
+      </ion-item>
+
+    </ion-card>
+
+  </div>
+
+
+</ion-content>
+
+<ion-footer  *ngIf="listCart.length>0" class="ion-no-border" mode="ios">
+  
+  <ion-toolbar style="padding-bottom: 15px;">
+    <div id="listBayar" style="text-align: right;padding: 0px 15px;font-size: 15px;">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="7">Total : </ion-col>
+            <ion-col size="5">Rp. {{ formatRupiah(viewTotal,"Rp. ") }}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="7">Potongan : </ion-col>
+            <ion-col size="5">(-) {{ formatRupiah(viewVoucer,"Rp. ") }}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="7">PPn : </ion-col>
+            <ion-col size="5">{{ formatRupiah(viewPPN,"Rp. ") }}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="7">Total Bayar : </ion-col>
+            <ion-col size="5"><strong style="color: #e91e63;">{{ formatRupiah(viewTotalBayar,"Rp. ") }}</strong></ion-col>
+          </ion-row>
+        </ion-grid>
+        
+
+    </div>
+    
+    <ion-button expand="block" (click)="actionCheckOut()" color="warning" fill="solid">
+          Checkout
+        </ion-button>
+  </ion-toolbar>
+</ion-footer>

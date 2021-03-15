@@ -1,0 +1,24 @@
+
+
+<ion-content mode="ios">
+
+  <div id="container">
+    <div style="color: #fff;font-size: 5em;">
+      <ion-icon name="alert-circle"></ion-icon>
+    </div>
+    <h1 style="color: #fff;margin-top: 5px;">Informasi</h1>
+    <div style="padding: 15px;">
+      <p style="color: #fff;">Aplikasi ini menggunakan penyimpanan data sementara dan akan dibersihkan setelah keluar dari aplikasi ini!</p>
+    </div>
+    <ion-grid>
+       <ion-row>
+        <ion-col>
+          <ion-button expand="block" [routerLink]="['/pembeli/login']" color="warning">Pembeli</ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button expand="block" [routerLink]="['/penjual']" color="warning">Penjual</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

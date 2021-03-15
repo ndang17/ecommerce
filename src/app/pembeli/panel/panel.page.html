@@ -1,0 +1,71 @@
+<ion-header mode="ios">
+  <ion-toolbar style="height: 57px;padding-top: 5px;">
+    
+    <ion-buttons (click)="presentAlertProfil()" slot="start" style="margin-left: 15px;">
+        <ion-button>
+          <ion-icon slot="icon-only" color="light" name="person-circle"></ion-icon>
+          
+        </ion-button>
+
+        {{ customer_name }}
+    </ion-buttons>
+
+  <ion-buttons slot="primary">
+    <ion-button [routerLink]="['/pembeli/myorder']" fill="solid" color="warning">
+      Transaksi Saya
+    </ion-button>
+  </ion-buttons>
+    
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content mode="ios">
+
+  <ion-card>
+    <ion-item>
+      <ion-label>Informasi</ion-label>
+    </ion-item>
+
+    <ion-card-content>
+      Untuk keluar dari halaman ini, silahkan gunakan 
+      <strong>Logout</strong> 
+    </ion-card-content>
+     <ion-item>
+      <ion-button color="danger" slot="end" (click)="presentAlertProfil()" fill="outline">Logout Sekarang</ion-button>
+    </ion-item>
+  </ion-card>
+
+
+  <ion-list *ngIf="listProduct.length>0" style="margin-top: 30px;">
+
+    <ion-list-header>
+          Daftar barang
+        </ion-list-header>
+
+    <ion-item *ngFor="let item of listProduct" (click)="openModal(item)">
+      <ion-avatar slot="start">
+        <img *ngIf="item.photo==''" src="./assets/miranda.jpg">
+        <img *ngIf="item.photo!=''" src="{{item.photo}}">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ item.product_name }}</h2>
+        <h3>{{ formatRupiah(item.price,"Rp. ") }}</h3>
+        <p>Kode : {{ item.pcode }} | Stok : {{ item.jumlah }}</p>
+        
+      </ion-label>
+    </ion-item>
+
+  </ion-list>
+
+  <!-- fab placed to the bottom start -->
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button [routerLink]="['/pembeli/cart']" color="warning">
+      <ion-icon name="cart"></ion-icon>
+      <div class="custom-badge">{{ cartCount }}</div>
+    </ion-fab-button>
+  </ion-fab>
+
+  
+
+</ion-content>

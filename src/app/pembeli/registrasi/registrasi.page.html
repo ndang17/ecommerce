@@ -1,0 +1,39 @@
+<ion-header mode="ios">
+  <ion-toolbar style="height: 57px;padding-top: 5px;">
+    <ion-buttons slot="start">
+      <ion-button color="light" (click)="goBack()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Registrasi</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content mode="ios">
+
+  <ion-card>
+    <ion-card-content>
+      <ion-item lines="none">
+            <ion-input placeholder="Nama Lengkap" [(ngModel)]="customer_name"></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+            <ion-textarea rows="3" placeholder="Alamat sekarang" [(ngModel)]="address"></ion-textarea>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label>Lat : </ion-label>
+            <ion-input [(ngModel)]="latitude" disabled></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label>Lng : </ion-label>
+            <ion-input [(ngModel)]="longitude" disabled></ion-input>
+      </ion-item>
+
+      <br/>
+      <br/>
+      <ion-button expand="block" (click)="simpanBarang()" color="warning">Simpan</ion-button>
+    </ion-card-content>
+
+  </ion-card>
+
+</ion-content>
