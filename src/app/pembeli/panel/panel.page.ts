@@ -57,7 +57,18 @@ export class PanelPage implements OnInit {
 
   ngOnInit() {
 
+  }
 
+  async presentAlert(header) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: header, //'Alert',
+      mode: 'ios',
+      message: 'Maaf, stok barang telah habis',
+      buttons: ['Tutup']
+    });
+
+    await alert.present();
   }
 
   ionViewDidEnter() {
@@ -95,8 +106,9 @@ export class PanelPage implements OnInit {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'Hai, ' + this.customer_name,
+      subHeader: 'Logout akan membersihkan data keranjang!',
       mode: 'ios',
-      message: this.address,
+      // message: this.address,
       buttons: [
         {
           text: 'Tutup',
@@ -108,8 +120,21 @@ export class PanelPage implements OnInit {
         }, {
           text: 'Logout',
           handler: () => {
-            localStorage.removeItem('userLogin');
-            this.NavController.navigateRoot([''], { replaceUrl: true });
+
+            let userLogin = localStorage.getItem('userLogin');
+            if (userLogin != '' && userLogin != null) {
+
+              let d_userLogin = JSON.parse(userLogin);
+              let customer_id = d_userLogin.customer_id;
+
+              localStorage.removeItem('order_' + customer_id);
+
+              localStorage.removeItem('userLogin');
+              this.NavController.navigateRoot([''], { replaceUrl: true });
+
+            }
+
+
           }
         }
       ]
@@ -138,14 +163,22 @@ export class PanelPage implements OnInit {
 
   async openModal(item: any) {
 
-    item.customer_id = this.currentUser.customer_id;
+    if (parseInt(item.jumlah) > 0) {
 
-    const modal = await this.modalController.create({
-      component: ModalItemComponent,
-      cssClass: 'my-custom-modal-css',
-      componentProps: item
-    });
-    return await modal.present();
+      item.customer_id = this.currentUser.customer_id;
+
+      const modal = await this.modalController.create({
+        component: ModalItemComponent,
+        cssClass: 'my-custom-modal-css',
+        componentProps: item
+      });
+      return await modal.present();
+
+    } else {
+      this.presentAlert(item.product_name);
+    }
+
+
 
   }
 
