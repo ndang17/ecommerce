@@ -345,7 +345,22 @@ export class DatabaseService {
 
         this.databaseObj.executeSql(data02, dataStock).then(data => {
 
-          resolve(1);
+          // adding mutasi
+          let data_mutasi = [moment().format('YYYY-MM-DD'), pcode, '', 'I', jumlah];
+          let data01_mutasi = `insert  into mutasi_stock (tgl_mutasi, pcode, order_id, type_mutasi, jumlah) values (?,?,?,?,?);`;
+
+          this.databaseObj.executeSql(data01_mutasi, data_mutasi).then(data => {
+
+            resolve(1);
+
+            // console.log('Mutasi ', data);
+
+          }).catch(e => {
+            // console.log('Mutasi Error', e);
+            reject(0);
+          })
+
+          // resolve(1);
 
         })
           .catch(e => {
@@ -494,10 +509,10 @@ export class DatabaseService {
 
                 resolve(1);
 
-                console.log('Mutasi ', data);
+                // console.log('Mutasi ', data);
 
               }).catch(e => {
-                console.log('Mutasi Error', e);
+                // console.log('Mutasi Error', e);
                 reject(0);
               })
 
