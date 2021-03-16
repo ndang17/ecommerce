@@ -1,0 +1,11 @@
+{
+  "android" : {
+    "release" : {
+      "keystore" : "my-release-key.keystore",
+      "storePassword" : "eco123123",
+      "alias" : "ecommerce_key",
+      "password" : "eco123123",
+      "keystoreType" : ""
+    }
+  }
+}
